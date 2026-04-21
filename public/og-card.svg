@@ -1,29 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" fill="none">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#0a0a0a"/>
-      <stop offset="1" stop-color="#1a1510"/>
-    </linearGradient>
-    <linearGradient id="gold" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#e8c878"/>
-      <stop offset="1" stop-color="#a77818"/>
-    </linearGradient>
-  </defs>
-  <rect width="1200" height="630" fill="url(#bg)"/>
-  <rect x="0" y="0" width="1200" height="4" fill="url(#gold)"/>
-  <!-- Simple lifeboat silhouette (large, left) -->
-  <g transform="translate(80 120) scale(2.2)">
-    <path fill="#2a2218" stroke="url(#gold)" stroke-width="1.2"
-      d="M40 180c0-36 31.5-63 72-63s72 27 72 63v18H40v-18zm22.5-81 27-45h81l27 45h-37.8l-11.7-19.8H91.2L79.5 99H62.5z"/>
-    <path stroke="#c9a227" stroke-width="2" stroke-linecap="round" d="M112 36v36"/>
-  </g>
-  <text x="520" y="260" fill="#f5f5f4" font-family="Georgia, 'Times New Roman', serif" font-size="64" font-weight="600">
-    The Scrum Lifeboat
-  </text>
-  <text x="520" y="340" fill="url(#gold)" font-family="system-ui, Segoe UI, sans-serif" font-size="28" font-weight="500" letter-spacing="0.35em">
-    COMMUNICATION INDICATOR
-  </text>
-  <text x="520" y="420" fill="#a8a29e" font-family="system-ui, Segoe UI, sans-serif" font-size="22">
-    Indicative DISC-style self-assessment - didactic use - no data stored
-  </text>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#0a0a0a"/>
+  <text
+    x="600"
+    y="340"
+    text-anchor="middle"
+    font-family="Georgia, 'Times New Roman', serif"
+    font-size="140"
+    font-weight="600"
+    fill="#c9a227"
+  >DISC</text>
+  <text
+    x="600"
+    y="420"
+    text-anchor="middle"
+    font-family="system-ui, -apple-system, Segoe UI, sans-serif"
+    font-size="26"
+    font-weight="500"
+    letter-spacing="0.2em"
+    fill="#9a8f7a"
+  >THE SCRUM LIFEBOAT</text>
+  <text
+    x="600"
+    y="470"
+    text-anchor="middle"
+    font-family="system-ui, -apple-system, Segoe UI, sans-serif"
+    font-size="20"
+    fill="#6b6560"
+  >Communication Indicator</text>
 </svg>
