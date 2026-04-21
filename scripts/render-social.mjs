@@ -11,8 +11,12 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const root = path.join(__dirname, "..");
 const pub = path.join(root, "public");
 
+// 600x315 is enough for OG previews and keeps the PNG small (not a favicon — see favicon.svg).
 const ogSvg = readFileSync(path.join(pub, "og-card.svg"));
-await sharp(ogSvg).resize(1200, 630).png({ compressionLevel: 9 }).toFile(path.join(pub, "og-card.png"));
+await sharp(ogSvg)
+  .resize(600, 315)
+  .png({ compressionLevel: 9, effort: 10 })
+  .toFile(path.join(pub, "og-card.png"));
 console.log("Wrote", path.join(pub, "og-card.png"));
 
 const favSvg = readFileSync(path.join(pub, "favicon.svg"));
