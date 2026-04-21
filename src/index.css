@@ -1,0 +1,626 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Fonts are loaded via Google Fonts in index.html */
+/* No @font-face declarations needed - Google Fonts handles font loading */
+
+@layer base {
+  /* ============================================
+     LIGHT MODE - Default
+     ============================================ */
+  :root {
+    /* Core palette - Updated Session 10 */
+    --background: 0 0% 96%; /* #f5f5f7 equivalent */
+    --foreground: 220 15% 12%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 15% 12%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 15% 12%;
+
+    /* Primary: deep champagne — darker than dark-mode value so it hits
+       WCAG AA as text on #f5f5f7 (ratio ~5.8:1). Buttons stay legible
+       with white foreground. */
+    --primary: 38 68% 38%; /* #a77818 equivalent */
+    --primary-foreground: 0 0% 100%;
+
+    /* Secondary */
+    --secondary: 220 8% 92%;
+    --secondary-foreground: 220 15% 12%;
+
+    /* Muted */
+    --muted: 220 8% 94%;
+    --muted-foreground: 220 10% 45%;
+
+    /* Accent: deep champagne (matches primary in light mode) */
+    --accent: 38 68% 38%;
+    --accent-foreground: 0 0% 100%;
+
+    /* Destructive */
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders & inputs */
+    --border: 220 10% 88%;
+    --input: 220 10% 88%;
+    --ring: 38 60% 48%; /* Slightly brighter than primary for focus visibility */
+    --radius: 0.375rem;
+
+    /* Line thickness hierarchy */
+    --line-subtle: 1px;      /* Card borders, light separators */
+    --line-standard: 2px;    /* Section dividers, timeline elements */
+    --line-emphasis: 3px;    /* Signature gold accents only */
+
+    /* Legacy color aliases - Updated to champagne gold Session 10 */
+    --champagne: 38 58% 58%; /* #d4a853 */
+    --champagne-light: 38 65% 68%; /* #e8c878 */
+    --champagne-dark: 38 50% 48%; /* #b8860b */
+    --amber: 38 58% 58%;
+    --amber-soft: 38 65% 68%;
+    --cream: 0 0% 96%; /* Updated to match light bg */
+    --cream-foreground: 38 58% 58%;
+    --slate-warm: 30 5% 45%;
+
+    /* Section colors - LIGHT MODE uses INVERSE logic - Updated Session 10 */
+    /* Header: Dark bg */
+    --section-dark-bg: 0 0% 3%; /* #080808 */
+    --section-dark-fg: 0 0% 96%;
+    /* Light sections */
+    --section-light-bg: 0 0% 96%; /* #f5f5f7 */
+    --section-light-fg: 220 15% 12%;
+    
+    /* Inverse text (for dark sections in light mode) */
+    --inverse-fg: 30 5% 15%;
+    --inverse-fg-muted: 30 5% 15%;
+
+    /* Sidebar */
+    --sidebar-background: 220 10% 98%;
+    --sidebar-foreground: 220 15% 12%;
+    --sidebar-primary: 38 58% 58%; /* Updated to champagne gold Session 10 */
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 8% 94%;
+    --sidebar-accent-foreground: 220 15% 12%;
+    --sidebar-border: 220 10% 88%;
+    --sidebar-ring: 35 40% 48%;
+
+    /* DISC dimension accents — tuned deeper than dark-mode so each hits
+       WCAG AA on #f5f5f7 for small/body text (all ≥ 4.5:1). */
+    --disc-d: 358 75% 42%;  /* Dominance — deep red */
+    --disc-i: 42 90% 30%;   /* Influence — dark honey (darker than gold to differentiate) */
+    --disc-s: 155 55% 30%;  /* Steadiness — forest sage */
+    --disc-c: 210 68% 38%;  /* Conscientiousness — deep steel blue */
+  }
+
+  /* ============================================
+     DARK MODE
+     ============================================ */
+  .dark {
+    /* Core palette - Pure cool black */
+    --background: 0 0% 3%; /* #080808 equivalent */
+    --foreground: 30 5% 96%;
+
+    --card: 0 0% 6%; /* #0f0f0f equivalent */
+    --card-foreground: 30 5% 96%;
+
+    --popover: 0 0% 6%;
+    --popover-foreground: 30 5% 96%;
+
+    /* Primary: Champagne Gold - Updated Session 10 */
+    --primary: 38 58% 58%; /* #d4a853 equivalent */
+    --primary-foreground: 0 0% 3%;
+
+    /* Secondary */
+    --secondary: 0 0% 10%;
+    --secondary-foreground: 30 5% 96%;
+
+    /* Muted */
+    --muted: 0 0% 10%;
+    --muted-foreground: 30 5% 65%;
+
+    /* Accent: Champagne Gold - Updated Session 10 */
+    --accent: 38 58% 58%; /* #d4a853 equivalent */
+    --accent-foreground: 0 0% 3%;
+
+    /* Destructive */
+    --destructive: 0 65% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    /* Borders & inputs - Updated Session 10 */
+    --border: 0 0% 10%; /* #1a1a1a equivalent */
+    --input: 0 0% 10%;
+    --ring: 38 58% 58%;
+
+    /* Legacy color aliases - Updated to champagne gold Session 10 */
+    --champagne: 38 58% 58%; /* #d4a853 */
+    --champagne-light: 38 65% 68%; /* #e8c878 */
+    --champagne-dark: 38 50% 48%; /* #b8860b */
+    --amber: 38 58% 58%;
+    --amber-soft: 38 65% 68%;
+    --cream: 30 10% 15%;
+    --cream-foreground: 38 58% 58%; /* Updated to champagne gold Session 10 */
+    --slate-warm: 30 5% 55%;
+
+    /* Section colors - DARK MODE uses INVERSE logic - Updated Session 10 */
+    /* Dark sections become light, light sections become dark */
+    --section-dark-bg: 0 0% 100%;
+    --section-dark-fg: 30 5% 12%;
+    --section-light-bg: 0 0% 3%; /* #080808 */
+    --section-light-fg: 30 5% 96%;
+    
+    /* Inverse text (for light sections in dark mode) */
+    --inverse-fg: 0 0% 100%;
+    --inverse-fg-muted: 0 0% 100%;
+
+    /* Sidebar */
+    --sidebar-background: 30 5% 10%;
+    --sidebar-foreground: 30 5% 96%;
+    --sidebar-primary: 38 58% 58%; /* Updated to champagne gold Session 10 */
+    --sidebar-primary-foreground: 30 5% 10%;
+    --sidebar-accent: 30 5% 14%;
+    --sidebar-accent-foreground: 30 5% 96%;
+    --sidebar-border: 30 5% 20%;
+    --sidebar-ring: 38 58% 58%;
+
+    /* DISC dimension accents — slightly brighter and more saturated
+       for dark mode so they read clearly on #080808 without fighting gold. */
+    --disc-d: 358 65% 60%;  /* Dominance — warm coral red */
+    --disc-i: 48 85% 62%;   /* Influence — clear yellow, greener than gold to avoid clash */
+    --disc-s: 155 42% 54%;  /* Steadiness — muted sage */
+    --disc-c: 210 58% 62%;  /* Conscientiousness — soft steel blue */
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  html {
+    scroll-behavior: smooth;
+    /* 
+     * CRITICAL: Force scrollbar to always be visible to prevent layout shift.
+     * When Radix UI components (DropdownMenu, Select, etc.) use scroll lock,
+     * the scrollbar disappears, causing viewport width to increase by ~15-17px.
+     * This causes all content to shift left. By forcing scrollbar visibility
+     * with overflow-y: scroll (not auto), the scrollbar space is always reserved,
+     * preventing viewport width changes regardless of scroll lock state.
+     */
+    overflow-y: scroll; /* Force scrollbar to always reserve space - prevents layout shift */
+    overflow-x: hidden; /* Prevent horizontal shift from dropdowns */
+    overscroll-behavior-x: none; /* Prevent horizontal overscroll */
+    scrollbar-gutter: stable; /* Modern CSS: reserve space for scrollbar (fallback for browsers that support it) */
+  }
+  
+  body {
+    overflow-x: hidden;
+    overscroll-behavior-x: none; /* Prevent horizontal overscroll */
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', system-ui, sans-serif;
+  }
+
+  /* Container base - no horizontal scrollbars */
+  .container {
+    max-width: 100%;
+    overflow-x: hidden;
+    width: 100%;
+  }
+
+  /* Override Radix react-remove-scroll to prevent layout shift */
+  /* Radix sets --removed-body-scroll-bar-size when scroll is locked */
+  /* This prevents horizontal page shift when scrollbar disappears */
+  /* 
+   * GLOBAL FIX: Prevent 18px jiggle/shift when ANY Radix component opens
+   * Radix adds data-scroll-locked and sets overflow: hidden + margin-right: 18px
+   * Solution: Keep scrollbar visible (overflow-y: scroll) and remove margin compensation
+   * This fixes: Select, Dialog, Sheet, DropdownMenu, and all other Radix components
+   */
+  body[data-scroll-locked] {
+    /* CRITICAL: Keep scrollbar visible to prevent layout shift */
+    overflow-y: scroll !important;
+    overflow-x: hidden !important;
+    /* Remove Radix's margin compensation that causes the 18px shift */
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    padding-right: 0 !important;
+    pointer-events: auto !important;
+  }
+  
+  /* CRITICAL: Override inline styles from Radix - use attribute selector for higher specificity */
+  body[data-scroll-locked][style*="pointer-events"] {
+    pointer-events: auto !important;
+  }
+  
+  /* Also override html to prevent any margin/padding compensation */
+  html[data-scroll-locked] {
+    overflow-y: scroll !important;
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+    padding-right: 0 !important;
+  }
+  
+  /* Ensure form elements remain interactive when Select is open */
+  body[data-scroll-locked] form,
+  body[data-scroll-locked] form *,
+  body form,
+  body form * {
+    pointer-events: auto !important;
+  }
+  
+  /* Specifically for Select with modal=false */
+  [data-radix-select-root][data-state="open"] ~ *,
+  body:has([data-radix-select-root][data-state="open"]) {
+    pointer-events: auto !important;
+  }
+  
+  /* Force all body children to be interactive when scroll locked */
+  body[data-scroll-locked] > * {
+    pointer-events: auto !important;
+  }
+  
+  /* Ensure Select content doesn't cause body pointer-events blocking */
+  [data-radix-select-content][data-position="item-aligned"] {
+    /* Item-aligned position should not trigger scroll lock */
+  }
+  
+  /* Position handling for SelectContent */
+  [data-radix-select-content][data-position="popper"] {
+    position: fixed !important;
+  }
+  
+  [data-radix-select-content][data-position="item-aligned"] {
+    position: absolute !important;
+    max-width: 100%;
+    /* Ensure parent has relative positioning for correct absolute positioning */
+  }
+  
+  /* Ensure Select parent containers have relative positioning */
+  form .relative,
+  .relative > [data-radix-select-trigger] {
+    position: relative;
+  }
+
+  /* Ensure form containers don't cause horizontal scroll */
+  form {
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-sans tracking-tight;
+  }
+}
+
+@layer components {
+  /* Typography classes */
+  .text-display {
+    @apply text-4xl md:text-5xl lg:text-6xl font-semibold leading-[1.1] tracking-tight;
+  }
+
+  .text-heading {
+    @apply text-lg font-semibold leading-snug;
+  }
+
+  .text-body {
+    @apply text-sm leading-relaxed;
+  }
+
+  .text-label {
+    font-family: 'JetBrains Mono', monospace;
+    @apply text-xs uppercase tracking-[0.15em] text-primary;
+  }
+
+  .text-caption {
+    font-family: 'JetBrains Mono', monospace;
+    @apply text-[10px] tracking-wide;
+  }
+
+  .text-label-sm {
+    font-family: 'JetBrains Mono', monospace;
+    @apply text-[9px] uppercase tracking-[0.15em] text-primary;
+  }
+
+  .text-metric {
+    @apply text-[28px] lg:text-[32px] font-semibold tracking-tight;
+  }
+
+  .text-link-sm {
+    @apply text-[10px] font-medium;
+  }
+
+  /* Section padding - standardized */
+  .section-padding {
+    @apply py-16 sm:py-20 lg:py-24;
+  }
+
+  .section-padding-sm {
+    @apply py-8 lg:py-10;
+  }
+
+  /* Container padding - standardized */
+  .container-padding {
+    @apply px-6 lg:px-12;
+  }
+
+  /* Card base styles with hover effects */
+  .card-base {
+    @apply relative rounded-lg border border-primary/30 transition-all duration-300 ease-out overflow-hidden;
+    @apply hover:border-primary/50 hover:shadow-lg hover:scale-[1.01];
+  }
+  
+  /* Card base without hover scale (for non-clickable elements) */
+  .card-base.cursor-default {
+    @apply hover:scale-100;
+  }
+
+  /* Grid pattern overlays */
+  .grid-overlay {
+    background-image: 
+      linear-gradient(to right, hsl(var(--foreground) / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, hsl(var(--foreground) / 0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+  }
+
+  /* Focus states for accessibility */
+  .focus-ring {
+    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary/50 focus-visible:ring-offset-2 focus-visible:ring-offset-background focus-visible:transition-all focus-visible:duration-150;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  /* Animation utilities */
+  .animate-pulse-slow {
+    animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+
+  @keyframes data-flow {
+    0% { opacity: 0.3; transform: translateY(10px); }
+    50% { opacity: 1; transform: translateY(0); }
+    100% { opacity: 0.3; transform: translateY(-10px); }
+  }
+
+  .animate-data-flow {
+    animation: data-flow 3s ease-in-out infinite;
+  }
+
+  @keyframes subtle-glow {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.7; }
+  }
+
+  .animate-subtle-glow {
+    animation: subtle-glow 4s ease-in-out infinite;
+  }
+
+  @keyframes gentleBounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(6px); }
+  }
+
+  .animate-gentle-bounce {
+    animation: gentleBounce 2.5s ease-in-out infinite;
+  }
+}
+
+/* ============================================
+   Session 10 Design Updates - Glassmorphism & Effects
+   ============================================ */
+
+/* Glassmorphism card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(40px) saturate(150%);
+  -webkit-backdrop-filter: blur(40px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
+}
+
+/* Top highlight line (our signature element) */
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(255, 255, 255, 0.2), 
+    transparent);
+  z-index: 1;
+}
+
+/* Card hover effect - use opacity and shadow only, no transform to prevent layout shift */
+.glass-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+/* Form elements should not have hover scale effect */
+form.glass-card:hover {
+  transform: none;
+}
+
+/* Accent glow for dots */
+.accent-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: hsl(var(--primary));
+  box-shadow: 0 0 12px hsl(var(--primary) / 0.5);
+}
+
+/* Gold underline with gradient */
+.gold-underline {
+  width: 36px;
+  height: 3px;
+  background: hsl(var(--primary));
+  border-radius: 2px;
+  box-shadow: 0 0 12px hsl(var(--primary) / 0.4);
+}
+
+/* Section line with fade */
+.section-line {
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(90deg, hsl(var(--primary) / 0.3), transparent);
+}
+
+/* Stat numbers with gold gradient */
+.stat-number {
+  background: linear-gradient(180deg, hsl(var(--primary)) 0%, hsl(var(--primary) / 0.7) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Light mode card adjustments */
+.light .glass-card {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.light .glass-card::before {
+  background: linear-gradient(90deg, 
+    transparent, 
+    rgba(0, 0, 0, 0.1), 
+    transparent);
+}
+
+.light .glass-card:hover {
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.light .stat-number {
+  background: linear-gradient(180deg, hsl(var(--primary) / 0.9) 0%, hsl(var(--primary)) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ============================================
+   SHADOW LEVEL SYSTEM
+   Standardized shadow levels for consistent depth and hierarchy
+   ============================================ */
+
+/* Shadow Level 1: Subtle - Cards at rest, minimal elevation */
+.shadow-level-1 {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.light .shadow-level-1 {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+/* Shadow Level 2: Medium - Hover states, interactive elements */
+.shadow-level-2 {
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+}
+
+.light .shadow-level-2 {
+  box-shadow: 
+    0 20px 40px rgba(0, 0, 0, 0.08),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+/* Shadow Level 3: Elevated - Modals, dropdowns, popovers */
+.shadow-level-3 {
+  box-shadow: 
+    0 32px 64px rgba(0, 0, 0, 0.5),
+    0 0 0 1px rgba(255, 255, 255, 0.15),
+    0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.light .shadow-level-3 {
+  box-shadow: 
+    0 32px 64px rgba(0, 0, 0, 0.12),
+    0 0 0 1px rgba(0, 0, 0, 0.08),
+    0 8px 16px rgba(0, 0, 0, 0.06);
+}
+
+/* Shadow Level 4: Prominent - Floating elements, tooltips, high-priority UI */
+.shadow-level-4 {
+  box-shadow: 
+    0 48px 96px rgba(0, 0, 0, 0.6),
+    0 0 0 1px rgba(255, 255, 255, 0.2),
+    0 16px 32px rgba(0, 0, 0, 0.4);
+}
+
+.light .shadow-level-4 {
+  box-shadow: 
+    0 48px 96px rgba(0, 0, 0, 0.16),
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    0 16px 32px rgba(0, 0, 0, 0.08);
+}
+
+/* Custom Scrollbar Styles (Windows & Webkit) */
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: hsl(var(--background));
+  border-left: 1px solid hsl(var(--border) / 0.3);
+}
+
+::-webkit-scrollbar-thumb {
+  background: hsl(var(--primary) / 0.3);
+  border-radius: 6px;
+  border: 2px solid hsl(var(--background));
+  transition: background 0.2s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: hsl(var(--primary) / 0.5);
+}
+
+/* Firefox */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: hsl(var(--primary) / 0.3) hsl(var(--background));
+}
+
+/* Accessibility: Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Subtle glow animation for WorldMap shine effect */
+@keyframes subtle-glow {
+  0% { opacity: 0.5; }
+  100% { opacity: 1; }
+}
