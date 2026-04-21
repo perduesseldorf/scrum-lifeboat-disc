@@ -1,4 +1,4 @@
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ChevronLeft, FastForward } from "lucide-react";
 import { TETRADS, ADJECTIVE_HINTS, type TetradOption, type Dim } from "../content";
@@ -12,6 +12,7 @@ interface Props {
 
 const TestScreen = ({ onComplete, onBackToIntro, initialAnswers }: Props) => {
   const [sessionSeed] = useState(() => Math.floor(Math.random() * 1_000_000));
+  const [blockedHint, setBlockedHint] = useState(false);
   const [current, setCurrent] = useState(0);
   const [answers, setAnswers] = useState<Record<number, { most?: Dim; least?: Dim }>>(() => {
     if (!initialAnswers || initialAnswers.length === 0) return {};
@@ -51,6 +52,10 @@ const TestScreen = ({ onComplete, onBackToIntro, initialAnswers }: Props) => {
   const canProceed = Boolean(currentAnswer.most && currentAnswer.least);
   const isLast = current === total - 1;
 
+  useEffect(() => {
+    if (canProceed) setBlockedHint(false);
+  }, [canProceed]);
+
   const buildFinalAnswers = (): Answer[] =>
     TETRADS.map((t) => {
       const a = answers[t.id]!;
@@ -58,7 +63,11 @@ const TestScreen = ({ onComplete, onBackToIntro, initialAnswers }: Props) => {
     });
 
   const handleNext = () => {
-    if (!canProceed) return;
+    if (!canProceed) {
+      setBlockedHint(true);
+      window.setTimeout(() => setBlockedHint(false), 3200);
+      return;
+    }
     if (isLast) {
       onComplete(buildFinalAnswers());
     } else {
@@ -81,12 +90,13 @@ const TestScreen = ({ onComplete, onBackToIntro, initialAnswers }: Props) => {
   const progressPct = ((current + (canProceed ? 1 : 0)) / total) * 100;
 
   return (
-    <div className="w-full max-w-xl mx-auto px-6 py-6">
+    <div className="w-full max-w-xl mx-auto px-6 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] touch-manipulation">
       <div className="mb-6 space-y-2">
         <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.18em] text-foreground/70">
           <button
+            type="button"
             onClick={handleBack}
-            className="flex items-center gap-1 hover:text-primary transition-colors focus-ring rounded"
+            className="flex items-center gap-1 hover:text-primary transition-colors focus-ring rounded touch-manipulation"
           >
             <ChevronLeft className="w-3 h-3" />
             Back
@@ -96,8 +106,9 @@ const TestScreen = ({ onComplete, onBackToIntro, initialAnswers }: Props) => {
           </span>
           {allAnswered ? (
             <button
+              type="button"
               onClick={handleJumpToResult}
-              className="flex items-center gap-1 text-primary/80 hover:text-primary transition-colors focus-ring rounded"
+              className="flex items-center gap-1 text-primary/80 hover:text-primary transition-colors focus-ring rounded touch-manipulation"
               title="All answered — re-score now"
             >
               Result
@@ -151,16 +162,26 @@ const TestScreen = ({ onComplete, onBackToIntro, initialAnswers }: Props) => {
             ))}
           </div>
 
-          <div className="mt-6 flex items-center justify-between">
-            <div className="text-[11px] text-foreground/70">
+          <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+            <div className="text-[11px] text-foreground/70 min-h-[2.5rem] flex flex-col justify-center">
               {currentAnswer.most && !currentAnswer.least && "Now tap the one that is least like you."}
               {!currentAnswer.most && "Tap the one that is most like you."}
               {currentAnswer.most && currentAnswer.least && "Ready to continue."}
+              {blockedHint && (
+                <span className="mt-1 text-destructive text-[11px] font-medium" role="status">
+                  Pick both Most and Least for this question — then Next works.
+                </span>
+              )}
             </div>
             <button
+              type="button"
               onClick={handleNext}
-              disabled={!canProceed}
-              className="px-5 py-2.5 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 disabled:opacity-30 disabled:cursor-not-allowed transition-all duration-300 font-medium text-sm tracking-wide focus-ring"
+              aria-disabled={!canProceed}
+              className={`shrink-0 px-5 py-2.5 rounded-md transition-all duration-300 font-medium text-sm tracking-wide focus-ring ${
+                canProceed
+                  ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                  : "bg-muted text-muted-foreground cursor-not-allowed border border-border/80"
+              }`}
             >
               {isLast ? "See result" : "Next"}
             </button>
@@ -192,7 +213,7 @@ const OptionCard = ({ option, state, onClick }: OptionCardProps) => {
   const hint = ADJECTIVE_HINTS[option.text];
 
   return (
-    <button onClick={onClick} className={`${base} ${byState[state]}`}>
+    <button type="button" onClick={onClick} className={`${base} ${byState[state]} touch-manipulation`}>
       <div className="flex items-start gap-3">
         <div className="flex-1 min-w-0">
           <div className="text-base sm:text-lg font-serif tracking-wide leading-tight">

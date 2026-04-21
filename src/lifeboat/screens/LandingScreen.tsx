@@ -11,7 +11,8 @@ interface Props {
 
 const LandingScreen = ({ onStart, onDemo }: Props) => {
   const [methodOpen, setMethodOpen] = useState(false);
-  const showDemo = import.meta.env.DEV && Boolean(onDemo);
+  // Demo shortcut is intentionally available on production too (lecture / QR testing).
+  const showDemo = Boolean(onDemo);
 
   return (
     <motion.div
@@ -53,7 +54,7 @@ const LandingScreen = ({ onStart, onDemo }: Props) => {
           <button
             onClick={() => onDemo?.(DEMO_DC_CHALLENGER)}
             className="flex items-center gap-1.5 text-[10px] text-foreground/60 hover:text-primary transition-colors font-mono uppercase tracking-wider focus-ring rounded border border-dashed border-border/60 hover:border-primary/50 px-3 py-1.5"
-            title="Skip to a pre-filled DC Challenger result (dev only)"
+            title="Skip to a pre-filled DC Challenger result (preview)"
           >
             <FastForward className="w-3 h-3" />
             Demo: DC Challenger
