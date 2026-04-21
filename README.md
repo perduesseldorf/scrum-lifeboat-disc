@@ -22,7 +22,3 @@ npm run build
 Production builds use `base: /scrum-lifeboat-disc/` so the app works under the project URL.
 
 **Live (GitHub Pages):** https://perduesseldorf.github.io/scrum-lifeboat-disc/
-
-If deploy fails with “Ensure GitHub Pages has been enabled”, run once:
-
-`gh api repos/perduesseldorf/scrum-lifeboat-disc/pages -X POST -f build_type=workflow`
