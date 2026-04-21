@@ -93,14 +93,7 @@ const TestScreen = ({ onComplete, onBackToIntro, initialAnswers }: Props) => {
     <div className="w-full max-w-xl mx-auto px-6 py-6 pb-[max(1.5rem,env(safe-area-inset-bottom,0px))] touch-manipulation">
       <div className="mb-6 space-y-2">
         <div className="flex items-center justify-between text-[10px] font-mono uppercase tracking-[0.18em] text-foreground/70">
-          <button
-            type="button"
-            onClick={handleBack}
-            className="flex items-center gap-1 hover:text-primary transition-colors focus-ring rounded touch-manipulation"
-          >
-            <ChevronLeft className="w-3 h-3" />
-            Back
-          </button>
+          <span className="w-14 sm:w-16" aria-hidden />
           <span>
             Question {current + 1} of {total}
           </span>
@@ -162,7 +155,7 @@ const TestScreen = ({ onComplete, onBackToIntro, initialAnswers }: Props) => {
             ))}
           </div>
 
-          <div className="mt-6 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+          <div className="mt-6 space-y-3">
             <div className="text-[11px] text-foreground/70 min-h-[2.5rem] flex flex-col justify-center">
               {currentAnswer.most && !currentAnswer.least && "Now tap the one that is least like you."}
               {!currentAnswer.most && "Tap the one that is most like you."}
@@ -173,18 +166,29 @@ const TestScreen = ({ onComplete, onBackToIntro, initialAnswers }: Props) => {
                 </span>
               )}
             </div>
-            <button
-              type="button"
-              onClick={handleNext}
-              aria-disabled={!canProceed}
-              className={`shrink-0 px-5 py-2.5 rounded-md transition-all duration-300 font-medium text-sm tracking-wide focus-ring ${
-                canProceed
-                  ? "bg-primary text-primary-foreground hover:bg-primary/90"
-                  : "bg-muted text-muted-foreground cursor-not-allowed border border-border/80"
-              }`}
-            >
-              {isLast ? "See result" : "Next"}
-            </button>
+            <div className="flex flex-row items-stretch sm:items-center justify-between gap-3">
+              <button
+                type="button"
+                onClick={handleBack}
+                className="flex flex-1 sm:flex-initial items-center justify-center gap-1.5 min-h-[44px] px-4 py-2.5 rounded-md border border-border/80 bg-card/50 text-foreground hover:bg-card hover:border-primary/40 transition-colors font-medium text-sm tracking-wide focus-ring touch-manipulation"
+                aria-label={current === 0 ? "Back to instructions" : "Back to previous question"}
+              >
+                <ChevronLeft className="w-4 h-4 shrink-0" />
+                {current === 0 ? "Intro" : "Back"}
+              </button>
+              <button
+                type="button"
+                onClick={handleNext}
+                aria-disabled={!canProceed}
+                className={`flex-1 sm:flex-initial min-h-[44px] min-w-[44%] sm:min-w-[140px] px-5 py-2.5 rounded-md transition-all duration-300 font-medium text-sm tracking-wide focus-ring touch-manipulation ${
+                  canProceed
+                    ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                    : "bg-muted text-muted-foreground cursor-not-allowed border border-border/80"
+                }`}
+              >
+                {isLast ? "See result" : "Next"}
+              </button>
+            </div>
           </div>
         </motion.div>
       </AnimatePresence>
